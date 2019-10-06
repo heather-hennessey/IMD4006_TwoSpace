@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("START GAME");
-        SceneManager.LoadScene("Quinn_MainScene");
+        SceneManager.LoadScene("Demo");
         Time.timeScale = 1f;
     }
 

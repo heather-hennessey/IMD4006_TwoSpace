@@ -269,7 +269,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.5
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -411,14 +411,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fb48a0013ab2b48a0364fee8450007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 500
-  JumpForce: 600
+  WalkSpeed: 300
+  JumpForce: 400
   _walk: {fileID: 7400000, guid: 48a9bc6d93ac6fd4d8753274e629bd83, type: 2}
   _jump: {fileID: 7400000, guid: 7a0b4309b9f09f94e9782d825f3c327f, type: 2}
   _Legs: {fileID: 111731745464057958}
   _Blade: {fileID: 4236578733828576}
   _GroundCast: {fileID: 4616291451764906}
-  cam: {fileID: 0}
+  _cam: {fileID: 0}
+  Ship: {fileID: 0}
   mirror: 0
 --- !u!114 &114518099193907548
 MonoBehaviour:

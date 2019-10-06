@@ -118,6 +118,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4110779522632870, guid: ed18ae643e6150e48a215de290a44235,
     type: 2}
   m_PrefabInternal: {fileID: 1600882357}
+--- !u!4 &220126206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3,
+    type: 2}
+  m_PrefabInternal: {fileID: 338145901}
 --- !u!1 &323528425
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +187,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &338145901
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.78894234
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -34.82968
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114882315826812996, guid: 39738b5dd596a734090b8330b85090b3,
+        type: 2}
+      propertyPath: Astro
+      value: 
+      objectReference: {fileID: 24600428}
+    - target: {fileID: 114882315826812996, guid: 39738b5dd596a734090b8330b85090b3,
+        type: 2}
+      propertyPath: _cam
+      value: 
+      objectReference: {fileID: 742416277}
+    m_RemovedComponents:
+    - {fileID: 61159584315199278, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!4 &365150282
 Transform:
   m_ObjectHideFlags: 0
@@ -194,7 +252,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742416273
 GameObject:
@@ -281,7 +339,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &742416279
 MonoBehaviour:
@@ -295,8 +353,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damping: 0.9
-  _target: {fileID: 24600428}
   offset: {x: 9, y: 7}
+  _player1: {fileID: 220126206}
+  _player2: {fileID: 24600428}
 --- !u!114 &742416280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +446,21 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4110779522632870, guid: ed18ae643e6150e48a215de290a44235, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235,
+        type: 2}
+      propertyPath: _cam
+      value: 
+      objectReference: {fileID: 742416277}
+    - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235,
+        type: 2}
+      propertyPath: Ship
+      value: 
+      objectReference: {fileID: 220126206}
+    - target: {fileID: 1955737573472398, guid: ed18ae643e6150e48a215de290a44235, type: 2}
+      propertyPath: m_Name
+      value: Astronaut
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed18ae643e6150e48a215de290a44235, type: 2}
@@ -448,3 +521,56 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 900544f289a6c68429b69f8b259d2a96, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1816712868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1937270799083644, guid: 39738b5dd596a734090b8330b85090b3,
+    type: 2}
+  m_PrefabInternal: {fileID: 338145901}
+--- !u!60 &1816712870
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816712868}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.05, y: 0.95}
+    newSize: {x: 3.05, y: 0.95}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.425, y: 0.185}
+      - {x: 1.285, y: 0.24499999}
+      - {x: 1.0849999, y: 0.265}
+      - {x: 0.965, y: 0.205}
+      - {x: 0.825, y: 0.325}
+      - {x: 0.635, y: 0.465}
+      - {x: 0.585, y: 0.475}
+      - {x: 0.255, y: 0.475}
+      - {x: -0.015, y: 0.33499998}
+      - {x: -0.295, y: 0.475}
+      - {x: -0.53499997, y: 0.475}
+      - {x: -0.635, y: 0.42499998}
+      - {x: -0.715, y: 0.345}
+      - {x: -0.765, y: 0.285}
+      - {x: -0.935, y: 0.195}
+      - {x: -1.115, y: 0.044999998}
+      - {x: -1.4449999, y: -0.125}
+      - {x: -1.525, y: -0.21499999}
+      - {x: -1.525, y: -0.415}
+      - {x: -1.435, y: -0.475}
+      - {x: 1.3149999, y: -0.475}
+      - {x: 1.415, y: -0.42499998}
+      - {x: 1.525, y: -0.265}
+      - {x: 1.525, y: 0.024999999}

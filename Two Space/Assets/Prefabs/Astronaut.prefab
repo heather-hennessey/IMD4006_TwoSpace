@@ -419,7 +419,7 @@ MonoBehaviour:
   _Blade: {fileID: 4236578733828576}
   _GroundCast: {fileID: 4616291451764906}
   _cam: {fileID: 0}
-  Ship: {fileID: 0}
+  Ship: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
   mirror: 0
 --- !u!114 &114518099193907548
 MonoBehaviour:

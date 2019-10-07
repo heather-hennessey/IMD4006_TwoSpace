@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position))
+        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.0f), _GroundCast.position))
         {
             if (!_hit.transform.CompareTag("Player"))
             {
@@ -97,11 +97,11 @@ public class Player : MonoBehaviour {
         {
             rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 
-            if (_canWalk)
-            {
-                _Legs.clip = _walk;
-                _Legs.Play();
-            }
+            //if (_canWalk)
+            //{
+            //    _Legs.clip = _walk;
+            //    _Legs.Play();
+            //}
         }
 
         else
@@ -112,8 +112,8 @@ public class Player : MonoBehaviour {
         if (_isJump)
         {
             rig.AddForce(new Vector2(0, JumpForce));
-            _Legs.clip = _jump;
-            _Legs.Play();
+            //_Legs.clip = _jump;
+            //_Legs.Play();
             _canJump = false;
             _isJump = false;
         }

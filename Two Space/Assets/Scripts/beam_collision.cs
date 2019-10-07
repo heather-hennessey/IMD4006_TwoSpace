@@ -32,7 +32,7 @@ public class beam_collision : MonoBehaviour
         {
             Debug.Log("Score up");
             FindObjectOfType<CountdownTimer>().incrementScore();
-            Destroy(gameObject);
+            Destroy(collider);
         }
     }
 

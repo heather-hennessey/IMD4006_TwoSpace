@@ -421,6 +421,8 @@ MonoBehaviour:
   _cam: {fileID: 0}
   Ship: {fileID: 4905959685725830, guid: 39738b5dd596a734090b8330b85090b3, type: 2}
   mirror: 0
+  alive: 0
+  GM: {fileID: 0}
 --- !u!114 &114518099193907548
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,6 +13,8 @@ TagManager:
   - Furnace
   - Fuel
   - ObjectFurnace
+  - Ship
+  - Asteroid
   layers:
   - Default
   - TransparentFX

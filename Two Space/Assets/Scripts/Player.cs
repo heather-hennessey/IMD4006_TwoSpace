@@ -13,6 +13,9 @@ public class Player : MonoBehaviour {
     public Camera _cam;
     public Transform Ship;
     public bool mirror;
+    
+    public bool alive;
+    public GameObject GM;
 
     private bool _canJump, _canWalk;
     private float camWidth, camHeight;
@@ -24,6 +27,7 @@ public class Player : MonoBehaviour {
 
 	void Start ()
     {
+        alive = true;
         rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
@@ -48,6 +52,12 @@ public class Player : MonoBehaviour {
         {
             _canWalk = false;
             _isJump = true;
+        }
+        if (alive == false)
+        {
+            Debug.Log("Player Died");
+            GameManager gmScript = GM.GetComponent<GameManager>();
+            gmScript.EndGame();
         }
     }
 

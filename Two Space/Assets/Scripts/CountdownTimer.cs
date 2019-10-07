@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    float StartTime = 10f;
+    public float StartTime = 20f;
     float CurrentTime = 0f;
 
     public Text CountdownTimerText;

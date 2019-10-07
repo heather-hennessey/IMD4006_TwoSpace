@@ -24,10 +24,10 @@ public class asteroid_movement : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D otherObj)
     {
         GameObject collider = otherObj.gameObject;
-        Debug.Log("Hit Object" + collider.tag);
+        //Debug.Log("Hit Object" + collider.tag);
         if(collider.tag == "Player")
         {
-            Debug.Log("Hit a player");
+            //Debug.Log("Hit a player");
             // die
             Player pScript = collider.GetComponent<Player>();
             pScript.alive = false;

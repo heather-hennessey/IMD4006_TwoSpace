@@ -25,7 +25,11 @@ public class Player : MonoBehaviour {
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
 
-	void Start ()
+    public bool IsInsideTractorBeam = false;
+    public KeyCode TractorKey;
+
+
+    void Start ()
     {
         alive = true;
         rig = gameObject.GetComponent<Rigidbody2D>();
@@ -122,6 +126,27 @@ public class Player : MonoBehaviour {
         //float clampYMin = Ship.position.y - (camHeight / 2.0f);
 
         //rig.transform.position = new Vector2(Mathf.Clamp(rig.transform.position.x, clampXMin, clampXMax), Mathf.Clamp(rig.transform.position.y, clampYMin, clampYMax));
+
+
+        if (Input.GetKeyDown(TractorKey))
+        {
+            if (IsInsideTractorBeam == false)
+            {
+                IsInsideTractorBeam = true;
+            }
+            else
+            {
+                IsInsideTractorBeam = false;
+            }
+
+        }
+
+        if (IsInsideTractorBeam)
+        {
+            rig.velocity = new Vector2(rig.velocity.x, 1 * WalkSpeed * Time.deltaTime);
+        }
+
+
     }
 
     public bool IsMirror()

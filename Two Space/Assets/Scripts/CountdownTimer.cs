@@ -7,8 +7,10 @@ public class CountdownTimer : MonoBehaviour
 {
     public float StartTime = 20f;
     float CurrentTime = 0f;
+    float Score = 0.0f;
 
     public Text CountdownTimerText;
+    public Text CurrentScore;
 
     void Start()
     {
@@ -25,5 +27,12 @@ public class CountdownTimer : MonoBehaviour
             CurrentTime = 0;
             FindObjectOfType<GameManager>().EndGame();
         }
+    }
+
+    public void incrementScore()
+    {
+        Score += 1.0f;
+        CurrentScore.text = Score.ToString("0");
+        Debug.Log(Score);
     }
 }

@@ -14,8 +14,8 @@ public class Death_Collision : MonoBehaviour {
         {
             Debug.Log("Knight entered");
             // Ded
-            Player playerScript = collider.transform.parent.GetComponent<Player>();
-            playerScript.alive = false;
+            Player pScript = collider.transform.parent.GetComponent<Player>();
+            pScript.alive = false;
 
         }
     }

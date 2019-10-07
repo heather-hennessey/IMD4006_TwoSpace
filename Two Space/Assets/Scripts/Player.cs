@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public Camera _cam;
     public Transform Ship;
     public bool mirror;
+    
     public bool alive;
     public GameObject GM;
 

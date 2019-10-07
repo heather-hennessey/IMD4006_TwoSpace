@@ -8,15 +8,20 @@ public class SpaceCraft : MonoBehaviour {
     public bool mirror;
     public Camera _cam;
     public Transform Astro;
+    
+    public bool alive;
+    public GameObject GM;
 
     private float _startScale;
     private float camWidth, camHeight;
     private Rigidbody2D rig;
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
+    
 
 	// Use this for initialization
 	void Start () {
+        alive = true;
         rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
@@ -70,6 +75,12 @@ public class SpaceCraft : MonoBehaviour {
         else
         {
             transform.localScale = new Vector3(-_startScale, _startScale, 1);
+        }
+        if(alive == false)
+        {
+            Debug.Log("Spacecraft Died");
+            GameManager gmScript = GM.GetComponent<GameManager>();
+            gmScript.EndGame();
         }
     }
 }

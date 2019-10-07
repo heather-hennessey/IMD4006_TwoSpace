@@ -7,9 +7,9 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
     public float WalkSpeed;
     public float JumpForce;
-    public AnimationClip _walk, _jump;
-    public Animation _Legs;
-    public Transform _Blade, _GroundCast;
+    //public AnimationClip _walk, _jump;
+    //public Animation _Legs;
+    public Transform _GroundCast;
     public Camera _cam;
     public Transform Ship;
     public bool mirror;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position))
+        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.0f), _GroundCast.position))
         {
             if (!_hit.transform.CompareTag("Player"))
             {
@@ -83,11 +83,11 @@ public class Player : MonoBehaviour {
         {
             rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 
-            if (_canWalk)
-            {
-                _Legs.clip = _walk;
-                _Legs.Play();
-            }
+            //if (_canWalk)
+            //{
+            //    _Legs.clip = _walk;
+            //    _Legs.Play();
+            //}
         }
 
         else
@@ -98,8 +98,8 @@ public class Player : MonoBehaviour {
         if (_isJump)
         {
             rig.AddForce(new Vector2(0, JumpForce));
-            _Legs.clip = _jump;
-            _Legs.Play();
+            //_Legs.clip = _jump;
+            //_Legs.Play();
             _canJump = false;
             _isJump = false;
         }
@@ -119,8 +119,8 @@ public class Player : MonoBehaviour {
         return mirror;
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, _GroundCast.position);
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawLine(transform.position, _GroundCast.position);
+    //}
 }

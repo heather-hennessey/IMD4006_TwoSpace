@@ -7,12 +7,12 @@ public class Death_Collision : MonoBehaviour {
     
 	void OnTriggerEnter2D(Collider2D otherObj)
     {
-        Debug.Log("Object entered");
+        
         GameObject collider = otherObj.gameObject;
         
         if(collider.tag == "Player")
         {
-            Debug.Log("Knight entered");
+            
             // Ded
             Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.alive = false;

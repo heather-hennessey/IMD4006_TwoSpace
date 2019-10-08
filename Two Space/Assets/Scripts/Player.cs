@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
     private RaycastHit2D _hit;
 
     public bool IsInsideTractorBeam = false;
-    public KeyCode TractorKey;
+    public float TractorBeamSpeed;
 
 
     void Start ()
@@ -128,22 +128,21 @@ public class Player : MonoBehaviour {
         //rig.transform.position = new Vector2(Mathf.Clamp(rig.transform.position.x, clampXMin, clampXMax), Mathf.Clamp(rig.transform.position.y, clampYMin, clampYMax));
 
 
-        if (Input.GetKeyDown(TractorKey))
-        {
-            if (IsInsideTractorBeam == false)
-            {
-                IsInsideTractorBeam = true;
-            }
-            else
-            {
-                IsInsideTractorBeam = false;
-            }
-
-        }
-
         if (IsInsideTractorBeam)
         {
-            rig.velocity = new Vector2(rig.velocity.x, 1 * WalkSpeed * Time.deltaTime);
+            rig.velocity = new Vector2(rig.velocity.x, 1 * TractorBeamSpeed * Time.deltaTime);
+            
+        
+            
+            //if(Ship.position.x > rig.position.x)
+            //{
+                //rig.velocity = new Vector2(rig.velocity.y, 1 * TractorBeamSpeed * Time.deltaTime);
+            //}
+            //else
+            //{
+                //rig.velocity = new Vector2(rig.velocity.y, -1 * TractorBeamSpeed * Time.deltaTime);
+            //}
+
         }
 
 

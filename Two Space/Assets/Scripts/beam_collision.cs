@@ -30,8 +30,7 @@ public class beam_collision : MonoBehaviour
         }
         else if(collider.tag == "Item")
         {
-            Debug.Log("Score up");
-            FindObjectOfType<CountdownTimer>().incrementScore();
+            FindObjectOfType<ScoreController>().incrementScore();
             Destroy(collider);
         }
     }

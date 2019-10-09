@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Demo");
         Time.timeScale = 1f;
+        FindObjectOfType<ScoreController>().ResetScore();
     }
 
     void Update()

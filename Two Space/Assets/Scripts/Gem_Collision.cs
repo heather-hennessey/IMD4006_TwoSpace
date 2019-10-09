@@ -20,10 +20,6 @@ public class Gem_Collision : MonoBehaviour {
     {
         if (gameObject.GetComponent<SpriteRenderer>().sprite == newSprite)
         {
-            //var pos = gameObject.transform.position;
-            //pos.y += 10.0f;
-            //gameObject.transform.position = pos;
-
             FindObjectOfType<ScoreController>().incrementScore();
             FindObjectOfType<beam_collision>().DestroyCollider();
         }

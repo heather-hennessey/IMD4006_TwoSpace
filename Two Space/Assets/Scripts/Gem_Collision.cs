@@ -8,26 +8,24 @@ public class Gem_Collision : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D otherObj)
     {
-        
         GameObject collider = otherObj.gameObject;
         
         if(collider.tag == "Player")
         {
-            
             // Turn into Gem
             gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
-        }
-       
+        }  
     }
     public void BeamUp()
     {
         if (gameObject.GetComponent<SpriteRenderer>().sprite == newSprite)
         {
-            Debug.Log("Beam entered");
-            var pos = gameObject.transform.position;
-            pos.y += 10.0f;
-            gameObject.transform.position = pos;
+            //var pos = gameObject.transform.position;
+            //pos.y += 10.0f;
+            //gameObject.transform.position = pos;
+
+            FindObjectOfType<ScoreController>().incrementScore();
+            FindObjectOfType<beam_collision>().DestroyCollider();
         }
     }
-
 }

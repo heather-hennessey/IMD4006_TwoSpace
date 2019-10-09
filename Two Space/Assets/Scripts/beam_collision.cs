@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class beam_collision : MonoBehaviour
 {
+    public bool DestroyItem = false;
 
     // Use this for initialization
     void Start()
@@ -30,8 +31,13 @@ public class beam_collision : MonoBehaviour
         }
         else if(collider.tag == "Item")
         {
-            FindObjectOfType<ScoreController>().incrementScore();
-            Destroy(collider);
+            FindObjectOfType<Gem_Collision>().BeamUp();
+
+            if(DestroyItem == true)
+            {
+                Destroy(collider);
+                DestroyItem = false;
+            }
         }
     }
 
@@ -45,5 +51,10 @@ public class beam_collision : MonoBehaviour
             Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.IsInsideTractorBeam = false;
         }
+    }
+
+    public void DestroyCollider()
+    {
+        DestroyItem = true;
     }
 }

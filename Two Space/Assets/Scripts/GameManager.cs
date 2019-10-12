@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
-        Debug.Log("START GAME");
         SceneManager.LoadScene("Demo");
         Time.timeScale = 1f;
+        FindObjectOfType<ScoreController>().ResetScore();
     }
 
     void Update()
@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        Debug.Log("pause");
     }
 
    public void ResumeGame()
@@ -43,12 +42,10 @@ public class GameManager : MonoBehaviour
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        Debug.Log("Resume");
     }
 
     public void MainMenu()
     {
-        Debug.Log("MAIN MENU");
         SceneManager.LoadScene("MainMenu");
     }
     
@@ -57,17 +54,12 @@ public class GameManager : MonoBehaviour
         if(GameHasEnded == false)
         {
             GameHasEnded = true;
-            Debug.Log("GAME OVER");
-
-            //show end screen and score
             SceneManager.LoadScene("EndMenu");
         }
     }
 
     public void QuitApplication()
     {
-        Debug.Log("QUIT");
         Application.Quit();
     }
-
 }

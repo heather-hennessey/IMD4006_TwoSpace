@@ -13,11 +13,11 @@ public class Player : MonoBehaviour {
     public Camera _cam;
     public Transform Ship;
     public bool mirror;
-    
+    public bool _canJump, _canWalk;
+
     public bool alive;
     public GameObject GM;
 
-    private bool _canJump, _canWalk;
     private float camWidth, camHeight;
     private bool _isWalk, _isJump;
     private float rot, _startScale;
@@ -35,21 +35,22 @@ public class Player : MonoBehaviour {
         rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
+        PlayerController controller = GetComponent<PlayerController>();
+
         //camHeight = 2.0f * _cam.orthographicSize;
         //camWidth = camHeight * _cam.aspect;
     }
 
     void Update()
     {
-        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.0f), _GroundCast.position))
-        {
-            if (!_hit.transform.CompareTag("Player"))
-            {
-                _canJump = true;
-                _canWalk = true;
-            }
-        }
-        else _canJump = false;
+        //if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.1f), _GroundCast.position))
+        //{
+        //    if (!_hit.transform.CompareTag("Player"))
+        //    {
+        //        _canJump = true;
+        //        _canWalk = true;
+        //    }
+        //}
 
         _inputAxis = new Vector2(Input.GetAxisRaw("P2_Horizontal"), Input.GetAxisRaw("P2_Vertical"));
         if (_inputAxis.y > 0 && _canJump)
@@ -144,8 +145,6 @@ public class Player : MonoBehaviour {
             //}
 
         }
-
-
     }
 
     public bool IsMirror()

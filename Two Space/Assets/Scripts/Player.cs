@@ -3,13 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
     public float WalkSpeed;
     public float JumpForce;
+    public float TimeToJumpApex;
     public AnimationClip _walk, _jump;
     public Animation _Legs;
-    public Transform _Blade, _GroundCast;
     public Camera _cam;
     public Transform Ship;
     public bool mirror;
@@ -25,17 +24,25 @@ public class Player : MonoBehaviour {
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
 
+    private PlayerController controller;
+    private Vector2 velocity;
+    private float gravity;
+    private float JumpVelocity;
+
     public bool IsInsideTractorBeam = false;
     public float TractorBeamSpeed;
-
 
     void Start ()
     {
         alive = true;
-        rig = gameObject.GetComponent<Rigidbody2D>();
+        //rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
-        PlayerController controller = GetComponent<PlayerController>();
+        controller = GetComponent<PlayerController>();
+
+        // https://www.youtube.com/watch?v=PlT44xr0iW0
+        gravity = -(2 * JumpForce) / Mathf.Pow(TimeToJumpApex, 2);
+        JumpVelocity = Mathf.Abs(gravity) * TimeToJumpApex;
 
         //camHeight = 2.0f * _cam.orthographicSize;
         //camWidth = camHeight * _cam.aspect;
@@ -52,8 +59,14 @@ public class Player : MonoBehaviour {
         //    }
         //}
 
+        if (controller.collisions.above || controller.collisions.below)
+        {
+            //rig.velocity = new Vector2(rig.velocity.x, 0);
+            velocity.y = 0;
+        }
+
         _inputAxis = new Vector2(Input.GetAxisRaw("P2_Horizontal"), Input.GetAxisRaw("P2_Vertical"));
-        if (_inputAxis.y > 0 && _canJump)
+        if (_inputAxis.y > 0 && controller.collisions.below)
         {
             _canWalk = false;
             _isJump = true;
@@ -81,43 +94,45 @@ public class Player : MonoBehaviour {
         else if (_inputAxis.x < 0)
             mirror = true;
 
+        // handle flipping of sprite depending direction of facing 
         if (!mirror)
-        {
-            //rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.localScale = new Vector3(_startScale, _startScale, 1);
-            //_Blade.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
-        }
         if (mirror)
-        {
-            //rot = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
             transform.localScale = new Vector3(-_startScale, _startScale, 1);
-            //_Blade.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
-        }
 
-        if (_inputAxis.x != 0)
-        {
-            rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+        //if (_inputAxis.x != 0)
+        //{
+        //    //rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+        //    velocity.x = _inputAxis.x * WalkSpeed * Time.deltaTime;
 
-            //if (_canWalk)
-            //{
-            //    _Legs.clip = _walk;
-            //    _Legs.Play();
-            //}
-        }
+        //    //if (_canWalk)
+        //    //{
+        //    //    _Legs.clip = _walk;
+        //    //    _Legs.Play();
+        //    //}
+        //}
 
-        else
-        {
-            rig.velocity = new Vector2(0, rig.velocity.y);
-        }
+        //else
+        //{
+        //    //rig.velocity = new Vector2(0, rig.velocity.y);
+        //    velocity.x = 0;
+        //}
+
+        Debug.Log(controller.collisions.below);
 
         if (_isJump)
         {
-            rig.AddForce(new Vector2(0, JumpForce));
+            //rig.AddForce(new Vector2(0, JumpForce));
+            velocity.y = JumpVelocity;
             //_Legs.clip = _jump;
             //_Legs.Play();
             _canJump = false;
             _isJump = false;
         }
+
+        velocity.x = _inputAxis.x * WalkSpeed * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
 
         //float clampXMax = Ship.position.x + (camWidth / 2.0f);
         //float clampXMin = Ship.position.x - (camWidth / 2.0f);
@@ -131,7 +146,7 @@ public class Player : MonoBehaviour {
 
         if (IsInsideTractorBeam)
         {
-            rig.velocity = new Vector2(rig.velocity.x, 1 * TractorBeamSpeed * Time.deltaTime);
+            velocity.y = 1 * TractorBeamSpeed * Time.deltaTime;
             
         
             
@@ -152,8 +167,8 @@ public class Player : MonoBehaviour {
         return mirror;
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, _GroundCast.position);
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawLine(transform.position, _GroundCast.position);
+    //}
 }

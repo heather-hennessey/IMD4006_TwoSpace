@@ -25,7 +25,9 @@ public class asteroid_movement : MonoBehaviour {
     {
         GameObject collider = otherObj.gameObject;
         //Debug.Log("Hit Object" + collider.tag);
-        if(collider.tag == "Player"){
+
+        if(collider.tag == "Player")
+        {
             //Debug.Log("Hit a player");
             // die
             Player pScript = collider.transform.parent.GetComponent<Player>();

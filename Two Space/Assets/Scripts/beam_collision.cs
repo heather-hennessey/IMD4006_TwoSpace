@@ -23,6 +23,7 @@ public class beam_collision : MonoBehaviour
         GameObject collider = otherObj.gameObject;
         if (collider.tag == "Player")
         {
+
             // Move up 
             Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.IsInsideTractorBeam = true;

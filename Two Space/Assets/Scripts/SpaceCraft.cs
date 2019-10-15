@@ -17,6 +17,8 @@ public class SpaceCraft : MonoBehaviour {
     private Rigidbody2D rig;
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
+
+    public Animator animator;
     
 
 	// Use this for initialization
@@ -79,13 +81,23 @@ public class SpaceCraft : MonoBehaviour {
         if(alive == false)
         {
             Debug.Log("Spacecraft Died");
-            GameManager gmScript = GM.GetComponent<GameManager>();
-            gmScript.EndGame();
+            //GameManager gmScript = GM.GetComponent<GameManager>();
+            FindObjectOfType<beam_collision>().HideBeam();
+            animator.SetBool("Death", true);
+            StartCoroutine(WaitFunction());
+            //gmScript.EndGame();
         }
     }
 
     public void Died()
     {
+        GameManager gmScript = GM.GetComponent<GameManager>();
+        gmScript.EndGame();
+    }
+
+    IEnumerator WaitFunction()
+    {
+        yield return new WaitForSeconds(1);
         GameManager gmScript = GM.GetComponent<GameManager>();
         gmScript.EndGame();
     }

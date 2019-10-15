@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
     void Start ()
     {
         alive = true;
+        _canWalk = true;
         rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
@@ -56,13 +57,14 @@ public class Player : MonoBehaviour {
         _inputAxis = new Vector2(Input.GetAxisRaw("P2_Horizontal"), Input.GetAxisRaw("P2_Vertical"));
         if (_inputAxis.y > 0 && _canJump)
         {
-            _canWalk = false;
+            //_canWalk = false;
             _isJump = true;
         }
         if (alive == false)
         {
             Debug.Log("Player Died");
             animator.SetBool("Dying", true);
+            _canWalk = _canJump = false;
             //wait 2 seconds
             //GameManager gmScript = GM.GetComponent<GameManager>();
             StartCoroutine(WaitFunction());
@@ -98,7 +100,7 @@ public class Player : MonoBehaviour {
             //_Blade.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
         }
 
-        if (_inputAxis.x != 0)
+        if (_inputAxis.x != 0 && _canWalk)
         {
             rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
             animator.SetBool("Running", true);

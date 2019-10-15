@@ -57,4 +57,10 @@ public class beam_collision : MonoBehaviour
     {
         DestroyItem = true;
     }
+
+    public void HideBeam()
+    {
+        Debug.Log("WORKING");
+        gameObject.GetComponent<Renderer>().enabled = false;
+    }
 }

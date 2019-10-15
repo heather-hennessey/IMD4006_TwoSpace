@@ -28,10 +28,13 @@ public class Player : MonoBehaviour {
     public bool IsInsideTractorBeam = false;
     public float TractorBeamSpeed;
 
+    public Animator animator;
+
 
     void Start ()
     {
         alive = true;
+        _canWalk = true;
         rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
@@ -54,14 +57,18 @@ public class Player : MonoBehaviour {
         _inputAxis = new Vector2(Input.GetAxisRaw("P2_Horizontal"), Input.GetAxisRaw("P2_Vertical"));
         if (_inputAxis.y > 0 && _canJump)
         {
-            _canWalk = false;
+            //_canWalk = false;
             _isJump = true;
         }
         if (alive == false)
         {
             Debug.Log("Player Died");
-            GameManager gmScript = GM.GetComponent<GameManager>();
-            gmScript.EndGame();
+            animator.SetBool("Dying", true);
+            _canWalk = _canJump = false;
+            //wait 2 seconds
+            //GameManager gmScript = GM.GetComponent<GameManager>();
+            StartCoroutine(WaitFunction());
+            //gmScript.EndGame();
         }
     }
 
@@ -93,9 +100,10 @@ public class Player : MonoBehaviour {
             //_Blade.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
         }
 
-        if (_inputAxis.x != 0)
+        if (_inputAxis.x != 0 && _canWalk)
         {
             rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+            animator.SetBool("Running", true);
 
             //if (_canWalk)
             //{
@@ -107,6 +115,7 @@ public class Player : MonoBehaviour {
         else
         {
             rig.velocity = new Vector2(0, rig.velocity.y);
+            animator.SetBool("Running", false);
         }
 
         if (_isJump)
@@ -116,6 +125,11 @@ public class Player : MonoBehaviour {
             //_Legs.Play();
             _canJump = false;
             _isJump = false;
+            animator.SetBool("Flying", true);
+        }
+        if(_canJump)
+        {
+            animator.SetBool("Flying", false);
         }
 
         //float clampXMax = Ship.position.x + (camWidth / 2.0f);
@@ -156,5 +170,12 @@ public class Player : MonoBehaviour {
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, _GroundCast.position);
+    }
+
+    IEnumerator WaitFunction()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager gmScript = GM.GetComponent<GameManager>();
+        gmScript.EndGame();
     }
 }

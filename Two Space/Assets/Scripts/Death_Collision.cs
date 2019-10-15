@@ -18,6 +18,11 @@ public class Death_Collision : MonoBehaviour {
             pScript.alive = false;
 
         }
+        else if (collider.tag == "Ship"){
+           // Ded
+            SpaceCraft sScript = collider.transform.parent.GetComponent<SpaceCraft>();
+            sScript.alive = false;
+        }
     }
 
 }

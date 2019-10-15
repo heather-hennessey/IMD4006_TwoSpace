@@ -21,23 +21,16 @@ public class beam_collision : MonoBehaviour
     void OnTriggerEnter2D(Collider2D otherObj)
     {
         GameObject collider = otherObj.gameObject;
-        //Debug.Log("Hit Object" + collider.tag);
         if (collider.tag == "Player")
         {
-           // Debug.Log("Player Enter");
+
             // Move up 
             Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.IsInsideTractorBeam = true;
         }
         else if(collider.tag == "Item")
         {
-            FindObjectOfType<Gem_Collision>().BeamUp();
-
-            if(DestroyItem == true)
-            {
-                Destroy(collider);
-                DestroyItem = false;
-            }
+            collider.GetComponent<Gem_Collision>().beamUp = true;
         }
     }
 
@@ -46,7 +39,6 @@ public class beam_collision : MonoBehaviour
         GameObject collider = otherObj.gameObject;
         if (collider.tag == "Player")
         {
-            //Debug.Log("Player Exit");
             // Move up 
             Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.IsInsideTractorBeam = false;

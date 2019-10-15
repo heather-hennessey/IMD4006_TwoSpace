@@ -5,34 +5,46 @@ using UnityEngine;
 public class Gem_Collision : MonoBehaviour {
 
 	public Sprite newSprite;
+    private bool keepGoing;
+    public bool beamUp;
+
+    void Start(){
+        beamUp = false;
+    }
 
     void OnTriggerEnter2D(Collider2D otherObj)
     {
-        Debug.Log("Object entered");
         GameObject collider = otherObj.gameObject;
         
         if(collider.tag == "Player")
         {
-            Debug.Log("Knight entered");
             // Turn into Gem
             gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
-        }
-        if(collider.tag == "Beam" && gameObject.GetComponent<SpriteRenderer>().sprite == newSprite)
-        {
-            Debug.Log("Beam entered");
-            // Get beamed up
-            //BeamUp();
-            
-        }
+        }  
     }
-    void BeamUp()
-    {
-        var pos = gameObject.transform.position;
-        while(pos.y < 0.0)
+    
+    void FixedUpdate(){
+        if(beamUp == true && gameObject.GetComponent<SpriteRenderer>().sprite == newSprite)
         {
-            pos.y += 1;
-            gameObject.transform.position = pos;
-        }   
-    }
+            SpaceCraft sc = FindObjectOfType<SpaceCraft>();
+            float x = 0f;
+            if(gameObject.transform.position.x < sc.transform.position.x)
+            {
+                x = 0.1f;
+            }
+            else if(gameObject.transform.position.x > sc.transform.position.x)
+            {
+                x = -0.1f;
+            }
 
+            gameObject.transform.Translate(x, 0.1f, 0f, Space.World);
+
+            if(gameObject.transform.position.y > sc.transform.position.y)
+            {
+                FindObjectOfType<ScoreController>().incrementScore();
+                FindObjectOfType<beam_collision>().DestroyCollider();
+                Destroy(gameObject);
+            }
+        }
+    }
 }

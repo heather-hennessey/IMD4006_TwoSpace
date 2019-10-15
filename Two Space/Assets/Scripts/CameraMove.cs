@@ -36,12 +36,12 @@ public class CameraMove : MonoBehaviour {
             Vector3 target;
             if (faceLeft)
             {
-                target = new Vector3(lastX - offset.x, ((_player1.position.y + _player2.position.y) / 2.0f) + offset.y + dynamicSpeed, transform.position.z);
+                target = new Vector3(lastX - offset.x, ((_player1.position.y + (_player2.position.y - 10.0f)) / 2.0f) + offset.y + dynamicSpeed, transform.position.z);
 
             }
             else
             {
-                target = new Vector3(lastX + offset.x, ((_player1.position.y + _player2.position.y) / 2.0f) + offset.y + dynamicSpeed, transform.position.z);
+                target = new Vector3(lastX + offset.x, ((_player1.position.y + (_player2.position.y - 10.0f)) / 2.0f) + offset.y + dynamicSpeed, transform.position.z);
             }
             Vector3 currentPosition = Vector3.Lerp(transform.position, target, damping * Time.deltaTime);
             transform.position = currentPosition;

@@ -16,7 +16,7 @@ public class asteroid_movement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         var pos = gameObject.transform.position;
-        pos.x = pos.x -= MoveSpeed * Time.deltaTime;
+        pos.x -= MoveSpeed * Time.deltaTime;
 		gameObject.transform.position = pos;
            
 	}
@@ -24,16 +24,18 @@ public class asteroid_movement : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D otherObj)
     {
         GameObject collider = otherObj.gameObject;
-        Debug.Log("Hit Object" + collider.tag);
-        if(collider.tag == "Player")
-        {
-            Debug.Log("Hit a player");
+        //Debug.Log("Hit Object" + collider.tag);
+        if(collider.tag == "Player"){
+            //Debug.Log("Hit a player");
             // die
-            Player pScript = collider.GetComponent<Player>();
+            Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.alive = false;
         }
-        else
-        {
+        else if (collider.tag == "Ship"){
+            SpaceCraft sScript = collider.transform.parent.GetComponent<SpaceCraft>();
+            sScript.alive = false;
+        }
+        else{
             Destroy(gameObject);
         }
     }

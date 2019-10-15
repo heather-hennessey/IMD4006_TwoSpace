@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    public float StartTime = 20f;
+    public float StartTime = 120f;
     float CurrentTime = 0f;
 
     public Text CountdownTimerText;
+    public Text CurrentScore;
 
     void Start()
     {

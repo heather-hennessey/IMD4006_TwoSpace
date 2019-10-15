@@ -25,7 +25,11 @@ public class Player : MonoBehaviour {
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
 
-	void Start ()
+    public bool IsInsideTractorBeam = false;
+    public float TractorBeamSpeed;
+
+
+    void Start ()
     {
         alive = true;
         rig = gameObject.GetComponent<Rigidbody2D>();
@@ -37,7 +41,7 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position))
+        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.0f), _GroundCast.position))
         {
             if (!_hit.transform.CompareTag("Player"))
             {
@@ -93,11 +97,11 @@ public class Player : MonoBehaviour {
         {
             rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 
-            if (_canWalk)
-            {
-                _Legs.clip = _walk;
-                _Legs.Play();
-            }
+            //if (_canWalk)
+            //{
+            //    _Legs.clip = _walk;
+            //    _Legs.Play();
+            //}
         }
 
         else
@@ -108,8 +112,8 @@ public class Player : MonoBehaviour {
         if (_isJump)
         {
             rig.AddForce(new Vector2(0, JumpForce));
-            _Legs.clip = _jump;
-            _Legs.Play();
+            //_Legs.clip = _jump;
+            //_Legs.Play();
             _canJump = false;
             _isJump = false;
         }
@@ -122,6 +126,26 @@ public class Player : MonoBehaviour {
         //float clampYMin = Ship.position.y - (camHeight / 2.0f);
 
         //rig.transform.position = new Vector2(Mathf.Clamp(rig.transform.position.x, clampXMin, clampXMax), Mathf.Clamp(rig.transform.position.y, clampYMin, clampYMax));
+
+
+        if (IsInsideTractorBeam)
+        {
+            rig.velocity = new Vector2(rig.velocity.x, 1 * TractorBeamSpeed * Time.deltaTime);
+            
+        
+            
+            //if(Ship.position.x > rig.position.x)
+            //{
+                //rig.velocity = new Vector2(rig.velocity.y, 1 * TractorBeamSpeed * Time.deltaTime);
+            //}
+            //else
+            //{
+                //rig.velocity = new Vector2(rig.velocity.y, -1 * TractorBeamSpeed * Time.deltaTime);
+            //}
+
+        }
+
+
     }
 
     public bool IsMirror()

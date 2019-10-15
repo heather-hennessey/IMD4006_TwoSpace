@@ -83,4 +83,10 @@ public class SpaceCraft : MonoBehaviour {
             gmScript.EndGame();
         }
     }
+
+    public void Died()
+    {
+        GameManager gmScript = GM.GetComponent<GameManager>();
+        gmScript.EndGame();
+    }
 }

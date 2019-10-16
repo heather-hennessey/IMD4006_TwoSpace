@@ -30,6 +30,7 @@ public class asteroid_movement : MonoBehaviour {
         {
             // die
             FindObjectOfType<Player>().alive = false;
+            FindObjectOfType<SoundManagerScript>().PlaySound("death");
             //Player pScript = collider.transform.parent.GetComponent<Player>();
             //print(pScript);
             //pScript.alive = false;
@@ -37,8 +38,10 @@ public class asteroid_movement : MonoBehaviour {
         else if (collider.tag == "Ship"){
             SpaceCraft sScript = collider.transform.parent.GetComponent<SpaceCraft>();
             sScript.alive = false;
+            FindObjectOfType<SoundManagerScript>().PlaySound("shipDeath");
         }
-        else{
+        else
+        {
             Destroy(gameObject);
         }
     }

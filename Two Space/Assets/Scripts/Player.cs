@@ -126,6 +126,7 @@ public class Player : MonoBehaviour {
             _canJump = false;
             _isJump = false;
             animator.SetBool("Flying", true);
+            FindObjectOfType<SoundManagerScript>().PlaySound("Booster");
         }
         if(_canJump)
         {

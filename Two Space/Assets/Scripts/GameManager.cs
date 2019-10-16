@@ -7,12 +7,16 @@ public class GameManager : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject PauseMenuUI;
+    public KeyCode ResetKey;
+    public KeyCode ResetKey2;
     
     public void StartGame()
     {
         SceneManager.LoadScene("TwoSpace");
         Time.timeScale = 1f;
         FindObjectOfType<ScoreController>().ResetScore();
+
+        FindObjectOfType<SoundManagerScript>().PlaySound("ambient");
     }
 
     void Update()
@@ -27,6 +31,11 @@ public class GameManager : MonoBehaviour
             {
                 PauseGame();
             }
+        }
+
+        if (Input.GetKeyDown(ResetKey) || Input.GetKeyDown(ResetKey2))
+        {
+            StartGame();
         }
     }
 

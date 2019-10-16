@@ -20,7 +20,9 @@ public class Gem_Collision : MonoBehaviour {
         {
             // Turn into Gem
             gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
-        }  
+            FindObjectOfType<SoundManagerScript>().PlaySound("crystalMine");
+
+        }
     }
     
     void FixedUpdate(){

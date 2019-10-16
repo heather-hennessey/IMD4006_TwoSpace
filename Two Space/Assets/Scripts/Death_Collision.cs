@@ -16,12 +16,13 @@ public class Death_Collision : MonoBehaviour {
             // Ded
             Player pScript = collider.transform.parent.GetComponent<Player>();
             pScript.alive = false;
-
+            FindObjectOfType<SoundManagerScript>().PlaySound("death");
         }
         else if (collider.tag == "Ship"){
            // Ded
             SpaceCraft sScript = collider.transform.parent.GetComponent<SpaceCraft>();
             sScript.alive = false;
+            FindObjectOfType<SoundManagerScript>().PlaySound("shipDeath");
         }
     }
 

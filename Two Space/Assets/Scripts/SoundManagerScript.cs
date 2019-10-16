@@ -5,18 +5,19 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip Booster, crystalMine, death, beam, shipDeath;
+    public static AudioClip Booster, crystalMine, death, beam, shipDeath, ambient;
     static AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
     {
-        BoosterSound = Resources.Load<AudioClip> ("Booster");
-        crystalMineSound = Resources.Load<AudioClip> ("crystalMine");
-        deathSound = Resources.Load<AudioClip> ("death");
-        beamSound = Resources.Load<AudioClip> ("beam");
-        shipDeathSound = Resources.Load<AudioClip>("shipDeath");
+        Booster = Resources.Load<AudioClip>("Booster");
+        crystalMine = Resources.Load<AudioClip>("crystalMine");
+        death = Resources.Load<AudioClip>("death");
+        beam = Resources.Load<AudioClip>("beam");
+        shipDeath = Resources.Load<AudioClip>("shipDeath");
+        ambient = Resources.Load<AudioClip>("heroes_of_the_moon");
 
-        audioSrc = GetComponent<AudioSource> ();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,25 +26,29 @@ public class SoundManagerScript : MonoBehaviour
         
     }
 
-    public static void PlaySound (string clip)
+    public void PlaySound (string clip)
     {
-        switch (clip) {
+        switch (clip)
+        {
             case "Booster":
-                audioSrc.PlayOneShot(BoosterSound);
+                audioSrc.PlayOneShot(Booster);
                 break;
             case "crystalMine":
-                audioSrc.PlayOneShot(crystalMineSound);
+                audioSrc.PlayOneShot(crystalMine);
                 break;
             case "death":
-                audioSrc.PlayOneShot(deathSound);
+                audioSrc.PlayOneShot(death);
                 break;
             case "beam":
-                audioSrc.PlayOneShot(beamSound);
+                audioSrc.PlayOneShot(beam);
                 break;
             case "shipDeath":
-                audioSrc.PlayOneShot(shipDeathSound);
+                audioSrc.PlayOneShot(shipDeath);
+                break;
+            case "ambient":
+                audioSrc.PlayOneShot(ambient);
                 break;
         }
     }
 }
-//insert in proper script SoundManaferScript.PlaySound("Booster")
+//insert in proper script SoundManagerScript.PlaySound("Booster")

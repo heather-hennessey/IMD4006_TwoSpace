@@ -19,13 +19,14 @@ public class GroundCollision : MonoBehaviour {
             // Ded
             
             parent.alive = false;
-
+            FindObjectOfType<SoundManagerScript>().PlaySound("shipDeath");
         }
-        if(collider.tag == "Asteroid")
+        if (collider.tag == "Asteroid")
         {
             //Debug.Log("Asteroid hit");
             // die
             parent.alive = false;
+            FindObjectOfType<SoundManagerScript>().PlaySound("shipDeath");
         }
     }
 }

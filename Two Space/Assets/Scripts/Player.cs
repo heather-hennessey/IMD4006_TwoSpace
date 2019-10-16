@@ -31,11 +31,16 @@ public class Player : MonoBehaviour {
 
     public bool IsInsideTractorBeam = false;
     public float TractorBeamSpeed;
+    public float PlayerMoveInBeam;
+    public Transform ShipPos;
+
+    public Animator animator;
 
     void Start ()
     {
         alive = true;
-        //rig = gameObject.GetComponent<Rigidbody2D>();
+        _canWalk = true;
+        rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
 
         controller = GetComponent<PlayerController>();
@@ -63,32 +68,30 @@ public class Player : MonoBehaviour {
         {
             //rig.velocity = new Vector2(rig.velocity.x, 0);
             velocity.y = 0;
+            _canJump = true;
         }
 
         _inputAxis = new Vector2(Input.GetAxisRaw("P2_Horizontal"), Input.GetAxisRaw("P2_Vertical"));
         if (_inputAxis.y > 0 && controller.collisions.below)
         {
-            _canWalk = false;
+            //_canWalk = false;
             _isJump = true;
         }
+
         if (alive == false)
         {
             Debug.Log("Player Died");
-            GameManager gmScript = GM.GetComponent<GameManager>();
-            gmScript.EndGame();
+            animator.SetBool("Dying", true);
+            _canWalk = _canJump = false;
+            //wait 2 seconds
+            //GameManager gmScript = GM.GetComponent<GameManager>();
+            StartCoroutine(WaitFunction());
+            //gmScript.EndGame();
         }
     }
 
     void FixedUpdate()
     {
-        //Vector3 dir = _cam.ScreenToWorldPoint(Input.mousePosition) - _Blade.transform.position;
-        //dir.Normalize();
-
-        //if (cam.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x + 0.2f)
-        //    mirror = false;
-        //if (cam.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x - 0.2f)
-        //    mirror = true;
-
         if (_inputAxis.x > 0)
             mirror = false;
         else if (_inputAxis.x < 0)
@@ -100,34 +103,33 @@ public class Player : MonoBehaviour {
         if (mirror)
             transform.localScale = new Vector3(-_startScale, _startScale, 1);
 
-        //if (_inputAxis.x != 0)
-        //{
-        //    //rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
-        //    velocity.x = _inputAxis.x * WalkSpeed * Time.deltaTime;
+        if (_inputAxis.x != 0 && _canWalk && controller.collisions.below)
+        {
+            animator.SetBool("Running", true);
 
-        //    //if (_canWalk)
-        //    //{
-        //    //    _Legs.clip = _walk;
-        //    //    _Legs.Play();
-        //    //}
-        //}
-
-        //else
-        //{
-        //    //rig.velocity = new Vector2(0, rig.velocity.y);
-        //    velocity.x = 0;
-        //}
-
-        Debug.Log(controller.collisions.below);
+            //if (_canWalk)
+            //{
+            //    _Legs.clip = _walk;
+            //    _Legs.Play();
+            //}
+        }
+        else
+        {
+            animator.SetBool("Running", false);
+        }
 
         if (_isJump)
         {
-            //rig.AddForce(new Vector2(0, JumpForce));
             velocity.y = JumpVelocity;
             //_Legs.clip = _jump;
             //_Legs.Play();
             _canJump = false;
             _isJump = false;
+            animator.SetBool("Flying", true);
+        }
+        if(_canJump)
+        {
+            animator.SetBool("Flying", false);
         }
 
         velocity.x = _inputAxis.x * WalkSpeed * Time.deltaTime;
@@ -147,18 +149,13 @@ public class Player : MonoBehaviour {
         if (IsInsideTractorBeam)
         {
             velocity.y = 1 * TractorBeamSpeed * Time.deltaTime;
-            
-        
-            
-            //if(Ship.position.x > rig.position.x)
-            //{
-                //rig.velocity = new Vector2(rig.velocity.y, 1 * TractorBeamSpeed * Time.deltaTime);
-            //}
-            //else
-            //{
-                //rig.velocity = new Vector2(rig.velocity.y, -1 * TractorBeamSpeed * Time.deltaTime);
-            //}
 
+            float lerpSpeed;
+            if (_inputAxis.x != 0)
+                lerpSpeed = PlayerMoveInBeam;
+            else
+                lerpSpeed = TractorBeamSpeed;
+            transform.position = Vector3.Lerp(transform.position, new Vector2(ShipPos.position.x, ShipPos.position.y - 5), lerpSpeed);
         }
     }
 
@@ -167,8 +164,10 @@ public class Player : MonoBehaviour {
         return mirror;
     }
 
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawLine(transform.position, _GroundCast.position);
-    //}
+    IEnumerator WaitFunction()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager gmScript = GM.GetComponent<GameManager>();
+        gmScript.EndGame();
+    }
 }

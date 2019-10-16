@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 0df9586d6721c2949a787b6e44902e45
   - enabled: 1
-    path: Assets/Scenes/Demo.unity
-    guid: 7beebdc2d140ece46a9735165d32b032
+    path: Assets/Scenes/TwoSpace.unity
+    guid: b76af8d666f461e4c807cb49443e3373
   - enabled: 1
     path: Assets/Scenes/EndMenu.unity
     guid: 248b9ff6436c3c243b044d453fea0d0a

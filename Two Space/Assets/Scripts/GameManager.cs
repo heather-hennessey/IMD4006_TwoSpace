@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("TwoSpace");
         Time.timeScale = 1f;
         FindObjectOfType<ScoreController>().ResetScore();
     }
@@ -47,8 +47,9 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        FindObjectOfType<ScoreController>().ResetScore();
     }
-    
+
     public void EndGame()
     {
         if(GameHasEnded == false)
